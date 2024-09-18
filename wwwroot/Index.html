@@ -11,6 +11,7 @@
 </head>
 
 <body class="bg1">
+
   <nav class="navbar bg-dark border-bottom border-body navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Vent-Soft</a>
@@ -38,6 +39,8 @@
     <button class="mt-3 mb-3 btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProductos">Agregar
       Producto</button>
 
+
+      <!--Tabla Productos-->
     <table class="table table-dark table-striped">
       <thead>
         <tr>
@@ -56,7 +59,7 @@
 
 
 
-    <!-- MODAL -->
+    <!-- MODAL Agregar Productos-->
     <div id="modalAgregarProductos" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -87,7 +90,7 @@
     </div>
 
 
-    <!-- MODAL -->
+    <!-- MODAL Editar Productos -->
     <div id="modalEditarProductos" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -119,6 +122,101 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+  <h1>Clientes</h1>
+    <hr>
+
+    <button class="mt-3 mb-3 btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarCliente">Agregar
+      Cliente</button>
+
+
+      <!--Tabla Clientes-->
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>NombreCliente</th>
+          <th>ApellidoCliente</th>
+          <th>DNI</th>
+          <th>Saldo</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="todosLosClientes"></tbody>
+    </table>
+
+
+
+
+    <!-- MODAL Agregar Clientes-->
+    <div id="modalAgregarCliente" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Agregar Nuevo Cliente</h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <label for="Nombre" class="form-label">Nombre</label>
+              <input type="text" id="Nombre" placeholder="Nombre" class="form-control">
+
+              <label for="Apellido" class="form-label">Apellido</label>
+              <input type="text" id="Nombre" placeholder="Apellido" class="form-control">
+
+              <label for="DNI" class="form-label">DNI</label>
+              <input type="number" id="DNI class="form-control">
+
+              <label for="Saldo" class="form-label">Saldo</label>
+              <input type="number" id="Saldo" class="form-control">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="CrearProducto();">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- MODAL Editar Cliente -->
+    <div id="modalEditarCliente" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar Cliente Existente</h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <input type="number" id="IdCliente" class="form-control" readonly hidden>
+
+              <label for="NombreEditar" class="form-label">Nombre</label>
+              <input type="text" id="NombreEditar" placeholder="Nombre del Cliente" class="form-control">
+
+              <label for="ApellidoEditar" class="form-label">Apellido</label>
+              <input type="text" id="ApellidoEditar" placeholder="Apellido del Cliente" class="form-control">
+
+              <label for="DNIEditar" class="form-label">DNI</label>
+              <input type="number" id="DNIEditar" class="form-control">
+
+              <label for="SaldoEditar" class="form-label">Saldo</label>
+              <input type="number" id="SaldoEditar" class="form-control">
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" onclick="EditarProducto();">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
 
 

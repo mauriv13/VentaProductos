@@ -32,6 +32,7 @@ function MostrarClientes(data) {
         let tdSaldo = document.createTextNode(element.Saldo);
         td4.appendChild(tdSaldo);
 
+        
         let btnEditar = document.createElement('button');
         btnEditar.innerText = 'Modificar';
         btnEditar.setAttribute('class', 'btn btn-info');

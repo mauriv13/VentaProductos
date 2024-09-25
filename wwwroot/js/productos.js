@@ -47,28 +47,29 @@ function MostrarProductos(data) {
         td6.appendChild(btnEliminar);
     });
 }
-// function MostrarProductos(data) {
-//     $("#todosLosProductos").empty();
-//     $.each(data, function(index, item) {
-//         $('#todosLosProductos').append(
-//             "<tr>",
-//             "<td>" + item.id + "</td>",
-//             "<td>" + item.nombreProducto + "</td>",
-//             "<td>" + item.cantidad + "</td>",
-//             "<td>" + item.precioVenta + "</td>",
-//             "<td>" + item.precioCompra + "</td>",
-//             "<td><button class='btn btn-info' onclick='BuscarProductoId(" + item.id + ")'>Modificar</button></td>",
-//             "<td><button class='btn btn-danger' onclick='EliminarProducto(" + item.id + ")'>Eliminar</button></td>",
-//             "</tr>"
-//         )
-//     })
-// }
 
 function CrearProducto() {
-    // var nombreProd = document.getElementById("Nombre").value;
-    // if (nombreProd == "" || nombreProd == null) {
-    //     return mensajesError('#error', null, "Por favor ingrese un Nombre para el Producto.");
-    // }
+    var nombreProducto = document.getElementById("Nombre").value;
+    if (nombreProducto == "" || nombreProducto == null || /[^a-zA-Z\s]/.test(nombreProducto)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Nombre.");
+        }
+    var cantidad = document.getElementById("Cantidad").value;
+    if (cantidad == "" || cantidad == null || /[^a-zA-Z\s]/.test(cantidad)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese la cantidad.");
+        }
+    var precioVenta = document.getElementById("PrecioVenta").value;
+    if (precioVenta == "" || precioVenta == null || !/^\d{8}$/.test(precioVenta)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Precio.");
+        }
+    var precioCompra = document.getElementById("PrecioCompra").value;
+    if (precioCompra == "" || precioCompra == null) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Precio.");
+        }
+
 
     let producto = {
         nombreProducto: document.getElementById("Nombre").value,
@@ -88,7 +89,7 @@ function CrearProducto() {
     )
     .then(response => response.json())
     .then(data =>{
-        // if(data.status == undefined){
+         if(data.status == undefined){
             document.getElementById("Nombre").value = "";
             document.getElementById("Cantidad").value = 0;
             document.getElementById("PrecioVenta").value = 0;
@@ -96,9 +97,9 @@ function CrearProducto() {
 
             $('#modalAgregarProductos').modal('hide');
             ObtenerProductos();
-        // } else {
-        //     mensajesError('#error', data);
-        // }
+         } else {
+             mensajesError('#error', data);
+         }
             
     })
     .catch(error => console.log("Hubo un error al guardar el Producto nuevo, verifique el mensaje de error: ", error))
@@ -145,6 +146,27 @@ function BuscarProductoId(id) {
 function EditarProducto() {
     let idProducto = document.getElementById("IdProducto").value;
 
+var nombreProducto = document.getElementById("Nombre").value;
+    if (nombreProducto == "" || nombreProducto == null || /[^a-zA-Z\s]/.test(nombreProducto)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Nombre.");
+        }
+    var cantidad = document.getElementById("Cantidad").value;
+    if (cantidad == "" || cantidad == null || /[^a-zA-Z\s]/.test(cantidad)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese la cantidad.");
+        }
+    var precioVenta = document.getElementById("PrecioVenta").value;
+    if (precioVenta == "" || precioVenta == null || !/^\d{8}$/.test(precioVenta)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Precio.");
+        }
+    var precioCompra = document.getElementById("PrecioCompra").value;
+    if (precioCompra == "" || precioCompra == null) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Precio.");
+        }
+
     let editarProducto = {
         id: idProducto,
         nombreProducto: document.getElementById("NombreEditar").value,
@@ -174,24 +196,24 @@ function EditarProducto() {
 }
 
 
-// function mensajesError(id, data, mensaje) {
-//     $(id).empty();
-//     if (data != null) {
-//         $.each(data.errors, function(index, item) {
-//             $(id).append(
-//                 "<ol>",
-//                 "<li>" + item + "</li>",
-//                 "</ol>"
-//             )
-//         })
-//     }
-//     else{
-//         $(id).append(
-//             "<ol>",
-//             "<li>" + mensaje + "</li>",
-//             "</ol>"
-//         )
-//     }
-    
-//     $(id).attr("hidden", false);
-// }
+function mensajesError(id, data, mensaje) {
+    $(id).empty();
+    if (data != null) {
+        $.each(data.errors, function(Index, item) {
+            $(id).append(
+                "<ol>",
+                "<li>" + item + "</li>",
+                "</ol>"
+            )
+        })
+    }
+    else{
+        $(id).append(
+            "<ol>",
+            "<li>" + mensaje + "</li>",
+            "</ol>"
+        )
+    }
+   
+    $(id).attr("hidden", false);
+}

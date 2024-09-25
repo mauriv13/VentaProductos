@@ -17,19 +17,19 @@ function MostrarClientes(data) {
         td0.appendChild(tdIdCliente);
 
         let td1 = tr.insertCell(1);
-        let tdNombreCliente = document.createTextNode(element.nombre);
+        let tdNombreCliente = document.createTextNode(element.nombreCliente);
         td1.appendChild(tdNombreCliente);
 
         let td2 = tr.insertCell(2);
-        let tdApellidoCliente = document.createTextNode(element.apellido);
+        let tdApellidoCliente = document.createTextNode(element.apellidoCliente);
         td2.appendChild(tdApellidoCliente);
 
         let td3 = tr.insertCell(3);
-        let tdDNI = document.createTextNode(element.DNI);
-        td3.appendChild(tdDNI);
+        let tdDni = document.createTextNode(element.dni);
+        td3.appendChild(tdDni);
 
         let td4 = tr.insertCell(4);
-        let tdSaldo = document.createTextNode(element.Saldo);
+        let tdSaldo = document.createTextNode(element.saldo);
         td4.appendChild(tdSaldo);
 
         
@@ -48,33 +48,34 @@ function MostrarClientes(data) {
         td6.appendChild(btnEliminar);
     });
 }
-// function MostrarProductos(data) {
-//     $("#todosLosProductos").empty();
-//     $.each(data, function(index, item) {
-//         $('#todosLosProductos').append(
-//             "<tr>",
-//             "<td>" + item.id + "</td>",
-//             "<td>" + item.nombreProducto + "</td>",
-//             "<td>" + item.cantidad + "</td>",
-//             "<td>" + item.precioVenta + "</td>",
-//             "<td>" + item.precioCompra + "</td>",
-//             "<td><button class='btn btn-info' onclick='BuscarProductoId(" + item.id + ")'>Modificar</button></td>",
-//             "<td><button class='btn btn-danger' onclick='EliminarProducto(" + item.id + ")'>Eliminar</button></td>",
-//             "</tr>"
-//         )
-//     })
-// }
+
 
 function CrearCliente() {
-    // var nombreProd = document.getElementById("Nombre").value;
-    // if (nombreProd == "" || nombreProd == null) {
-    //     return mensajesError('#error', null, "Por favor ingrese un Nombre para el Producto.");
-    // }
+    var nombreCliente = document.getElementById("NombreCliente").value;
+    if (nombreCliente == "" || nombreCliente == null || /[^a-zA-Z\s]/.test(nombreCliente)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Nombre.");
+        }
+    var apellidoCliente = document.getElementById("ApellidoCliente").value;
+    if (apellidoCliente == "" || apellidoCliente == null || /[^a-zA-Z\s]/.test(apellidoCliente)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un Apellido.");
+        }
+    var dni = document.getElementById("Dni").value;
+    if (dni == "" || dni == null || !/^\d{8}$/.test(dni)) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un DNI válido de 8 dígitos.");
+        }
+    var saldo = document.getElementById("Saldo").value;
+    if (saldo == "" || saldo == null) 
+        {
+        return mensajesError('#error', null, "Por favor ingrese un saldo positivo.");
+        }
 
     let cliente = {
-        nombre: document.getElementById("NombreCliente").value,
-        apellido: document.getElementById("ApellidoCliente").value,
-        DNI: document.getElementById("DNI").value,
+        nombreCliente: document.getElementById("NombreCliente").value,
+        apellidoCliente: document.getElementById("ApellidoCliente").value,
+        dni: document.getElementById("Dni").value,
         saldo: document.getElementById("Saldo").value,
     };
 
@@ -89,17 +90,17 @@ function CrearCliente() {
     )
     .then(response => response.json())
     .then(data =>{
-        // if(data.status == undefined){
+        if(data.status == undefined){
             document.getElementById("NombreCliente").value = "";
             document.getElementById("ApellidoCliente").value = "";
-            document.getElementById("DNI").value = 0;
+            document.getElementById("Dni").value = 0;
             document.getElementById("Saldo").value = 0;
 
-            $('#modalAgregarCliente').modal('hide');
+            $('#modalAgregarClientes').modal('hide');
             ObtenerClientes();
-        // } else {
-        //     mensajesError('#error', data);
-        // }
+         } else {
+             mensajesError('#error', data);
+         }
             
     })
     .catch(error => console.log("Hubo un error al guardar el Cliente nuevo, verifique el mensaje de error: ", error))
@@ -131,10 +132,10 @@ function BuscarClienteId(id) {
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById("IdProducto").value = data.id;
-        document.getElementById("NombreEditar").value = data.nombre;
-        document.getElementById("ApellidoEditar").value = data.apellido;
-        document.getElementById("DNIEditar").value = data.DNI;
+        document.getElementById("IdCliente").value = data.id;
+        document.getElementById("NombreClienteEditar").value = data.nombreCliente;
+        document.getElementById("ApellidoClienteEditar").value = data.apellidoCliente;
+        document.getElementById("DniEditar").value = data.dni;
         document.getElementById("SaldoEditar").value = data.saldo;
 
         $('#modalEditarClientes').modal('show');
@@ -144,13 +145,34 @@ function BuscarClienteId(id) {
 
 
 function EditarCliente() {
-    let idProducto = document.getElementById("IdCliente").value;
+    let idCliente = document.getElementById("IdCliente").value;
+
+    var nombreCliente = document.getElementById("NombreClienteEditar").value;
+    if (nombreCliente == "" || nombreCliente == null || /[^a-zA-Z\s]/.test(nombreCliente)) 
+        {
+        return mensajesError('#errorEditar', null, "Por favor ingrese un Nombre.");
+        }
+    var apellidoCliente = document.getElementById("ApellidoClienteEditar").value;
+    if (apellidoCliente == "" || apellidoCliente == null || /[^a-zA-Z\s]/.test(apellidoCliente)) 
+        {
+        return mensajesError('#errorEditar', null, "Por favor ingrese un Apellido.");
+        }
+    var dni = document.getElementById("DniEditar").value;
+    if (dni == "" || dni == null || !/^\d{8}$/.test(dni)) 
+        {
+        return mensajesError('#errorEditar', null, "Por favor ingrese un DNI válido de 8 dígitos.");
+        }
+    var saldo = document.getElementById("SaldoEditar").value;
+    if (saldo == "" || saldo == null || parseFloat(saldo) < 0) 
+        {
+        return mensajesError('#errorEditar', null, "Por favor ingrese un saldo positivo.");
+        }
 
     let editarCliente = {
         id: idCliente,
-        nombre: document.getElementById("NombreEditar").value,
-        apellido: document.getElementById("ApellidoEditar").value,
-        DNI: document.getElementById("DNIEditar").value,
+        nombreCliente: document.getElementById("NombreClienteEditar").value,
+        apellidoCliente: document.getElementById("ApellidoClienteEditar").value,
+        dni: document.getElementById("DniEditar").value,
         saldo: document.getElementById("SaldoEditar").value
     }
 
@@ -162,37 +184,42 @@ function EditarCliente() {
         body: JSON.stringify(editarCliente)
     })
     .then(data => {
+        if (data.status == undefined || data.status == 204) {
 
             document.getElementById("IdCliente").value = 0;
-            document.getElementById("NombreEditar").value = "";
-            document.getElementById("ApellidoEditar").value = 0;
-            document.getElementById("DNIEditar").value = 0;
+            document.getElementById("NombreClienteEditar").value = "";
+            document.getElementById("ApellidoClienteEditar").value = 0;
+            document.getElementById("DniEditar").value = 0;
             document.getElementById("SaldoEditar").value = 0;
             $('#modalEditarClientes').modal('hide');
             ObtenerClientes();
+        }
+        else {
+            mensajesError('#errorEditar', data);
+        }
     })
     .catch(error => console.error("No se pudo acceder a la api, verifique el mensaje de error: ", error))
 }
 
 
-// function mensajesError(id, data, mensaje) {
-//     $(id).empty();
-//     if (data != null) {
-//         $.each(data.errors, function(index, item) {
-//             $(id).append(
-//                 "<ol>",
-//                 "<li>" + item + "</li>",
-//                 "</ol>"
-//             )
-//         })
-//     }
-//     else{
-//         $(id).append(
-//             "<ol>",
-//             "<li>" + mensaje + "</li>",
-//             "</ol>"
-//         )
-//     }
-    
-//     $(id).attr("hidden", false);
-// }
+function mensajesError(id, data, mensaje) {
+    $(id).empty();
+    if (data != null) {
+        $.each(data.errors, function(Index, item) {
+            $(id).append(
+                "<ol>",
+                "<li>" + item + "</li>",
+                "</ol>"
+            )
+        })
+    }
+    else{
+        $(id).append(
+            "<ol>",
+            "<li>" + mensaje + "</li>",
+            "</ol>"
+        )
+    }
+   
+    $(id).attr("hidden", false);
+}

@@ -96,6 +96,8 @@ function CrearCliente() {
             document.getElementById("Dni").value = 0;
             document.getElementById("Saldo").value = 0;
 
+            $('#error').empty();
+            $('#error').attr("hidden", true);
             $('#modalAgregarClientes').modal('hide');
             ObtenerClientes();
          } else {

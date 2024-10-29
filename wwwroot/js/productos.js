@@ -55,19 +55,19 @@ function CrearProducto() {
         return mensajesError('#error', null, "Por favor ingrese un Nombre.");
         }
     var cantidad = document.getElementById("Cantidad").value;
-    if (cantidad == "" || cantidad == null || /[^a-zA-Z\s]/.test(cantidad)) 
+    if (cantidad == "" || cantidad == null) 
         {
         return mensajesError('#error', null, "Por favor ingrese la cantidad.");
         }
     var precioVenta = document.getElementById("PrecioVenta").value;
-    if (precioVenta == "" || precioVenta == null || !/^\d{8}$/.test(precioVenta)) 
+    if (precioVenta == "" || precioVenta == null) 
         {
-        return mensajesError('#error', null, "Por favor ingrese un Precio.");
+        return mensajesError('#error', null, "Por favor ingrese un Precio de Venta.");
         }
     var precioCompra = document.getElementById("PrecioCompra").value;
     if (precioCompra == "" || precioCompra == null) 
         {
-        return mensajesError('#error', null, "Por favor ingrese un Precio.");
+        return mensajesError('#error', null, "Por favor ingrese un Precio de Compra.");
         }
 
 
@@ -95,6 +95,8 @@ function CrearProducto() {
             document.getElementById("PrecioVenta").value = 0;
             document.getElementById("PrecioCompra").value = 0;
 
+            $('#error').empty();
+            $('#error').attr("hidden", true);
             $('#modalAgregarProductos').modal('hide');
             ObtenerProductos();
          } else {
@@ -146,22 +148,22 @@ function BuscarProductoId(id) {
 function EditarProducto() {
     let idProducto = document.getElementById("IdProducto").value;
 
-var nombreProducto = document.getElementById("Nombre").value;
+    var nombreProducto = document.getElementById("NombreEditar").value;
     if (nombreProducto == "" || nombreProducto == null || /[^a-zA-Z\s]/.test(nombreProducto)) 
         {
         return mensajesError('#error', null, "Por favor ingrese un Nombre.");
         }
-    var cantidad = document.getElementById("Cantidad").value;
+    var cantidad = document.getElementById("CantidadEditar").value;
     if (cantidad == "" || cantidad == null || /[^a-zA-Z\s]/.test(cantidad)) 
         {
         return mensajesError('#error', null, "Por favor ingrese la cantidad.");
         }
-    var precioVenta = document.getElementById("PrecioVenta").value;
+    var precioVenta = document.getElementById("PrecioVentaEditar").value;
     if (precioVenta == "" || precioVenta == null || !/^\d{8}$/.test(precioVenta)) 
         {
         return mensajesError('#error', null, "Por favor ingrese un Precio.");
         }
-    var precioCompra = document.getElementById("PrecioCompra").value;
+    var precioCompra = document.getElementById("PrecioCompraEditar").value;
     if (precioCompra == "" || precioCompra == null) 
         {
         return mensajesError('#error', null, "Por favor ingrese un Precio.");

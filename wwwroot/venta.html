@@ -95,29 +95,22 @@
     </div>
 
 
-    <!-- MODAL Editar Clientes -->
+    <!-- MODAL Editar Venta -->
      <!--
-    <div id="modalEditarClientes" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+    <div id="modalEditarVentas" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-           <h5 class="modal-title">Editar Cliente Existente</h5>
+           <h5 class="modal-title">Editar Venta Existente</h5>
           </div>
           <div class="modal-body">
             <div class="row">
-              <input type="number" id="IdCliente" class="form-control" readonly hidden>
+              <input type="number" id="IdVenta" class="form-control" readonly hidden>
 
-              <label for="NombreClienteEditar" class="form-label">NombreCliente</label>
-              <input type="text" id="NombreClienteEditar" placeholder="Nombre del Cliente" class="form-control">
+              <label for="FechaEditar" class="form-label">Fecha</label>
+              <input type="datetime" id="FechaEditar" placeholder="Fecha de la Venta" class="form-control">
 
-              <label for="ApellidoClienteEditar" class="form-label">ApellidoCliente</label>
-              <input type="text" id="ApellidoClienteEditar" placeholder="Apellido del Cliente" class="form-control">
-
-              <label for="DniEditar" class="form-label">ApellidoCliente</label>
-              <input type="number" id="DniEditar" placeholder="Dni del Cliente" class="form-control">
-            
-              <label for="SaldoEditar" class="form-label">ApellidoCliente</label>
-              <input type="number" id="SaldoEditar" placeholder="Saldo del Cliente" class="form-control">
+              
             </div>
 
             <p id="errorEditar" hidden style="color: red;"></p>
@@ -125,7 +118,7 @@
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" onclick="EditarCliente();">Guardar</button>
+              <button type="button" class="btn btn-primary" onclick="EditarVenta();">Guardar</button>
             </div>
           </div>
         </div>
@@ -142,6 +135,7 @@
 
     <script type="text/javascript">
       window.onload = ObtenerClientes();
+      window.onload = ObtenerVentas();
     </script>
 </body>
 
